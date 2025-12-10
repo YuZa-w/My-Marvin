@@ -94,7 +94,6 @@ jobs:
         }
         
         steps {
-          shell('cp /var/jenkins_home/job_dsl.groovy .')
           dsl {
             external('job_dsl.groovy')
             removeAction('IGNORE')
@@ -106,3 +105,6 @@ jobs:
 unclassified:
   location:
     url: "http://localhost:8080/"
+  
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
