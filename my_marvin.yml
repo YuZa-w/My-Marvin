@@ -24,7 +24,6 @@ jenkins:
         global:
           - name: "admin"
             description: "Marvin master"
-            pattern: ".*"
             permissions:
               - "Overall/Administer"
             entries:
@@ -32,10 +31,8 @@ jenkins:
 
           - name: "ape"
             description: "Pedagogical team member"
-            pattern: ".*"
             permissions:
               - "Overall/Read"
-              - "View/Read"
               - "Job/Read"
               - "Job/Build"
               - "Job/Workspace"
@@ -44,10 +41,8 @@ jenkins:
 
           - name: "gorilla"
             description: "Group Obsessively Researching Innovation Linked to Learning and Accomplishment"
-            pattern: ".*"
             permissions:
               - "Overall/Read"
-              - "View/Read"
               - "Job/Read"
               - "Job/Build"
               - "Job/Workspace"
@@ -61,14 +56,52 @@ jenkins:
 
           - name: "assist"
             description: "Assistant"
-            pattern: ".*"
             permissions:
               - "Overall/Read"
-              - "View/Read"
               - "Job/Read"
               - "Job/Workspace"
             entries:
               - user: "nasso"
+
+jobs:
+  - script: >
+      folder('Tools') {
+        description('Folder for miscellaneous tools.')
+      }
+
+      freeStyleJob('Tools/clone-repository') {
+        description('Job to clone a Git repository')
+        
+        parameters {
+          stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
+        }
+        
+        wrappers {
+          preBuildCleanup()
+        }
+        
+        steps {
+          shell('git clone ${GIT_REPOSITORY_URL}')
+        }
+      }
+
+      freeStyleJob('Tools/SEED') {
+        description('Job to create dynamic jobs from Job DSL')
+        
+        parameters {
+          stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name')
+          stringParam('DISPLAY_NAME', '', 'Display name for the job')
+        }
+        
+        steps {
+          shell('cp /var/jenkins_home/job_dsl.groovy .')
+          dsl {
+            external('job_dsl.groovy')
+            removeAction('IGNORE')
+            removeViewAction('IGNORE')
+          }
+        }
+      }
 
 unclassified:
   location:
