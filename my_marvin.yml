@@ -105,6 +105,3 @@ jobs:
 unclassified:
   location:
     url: "http://localhost:8080/"
-  
-  globalJobDslSecurityConfiguration:
-    useScriptSecurity: false
