@@ -95,9 +95,9 @@ jobs:
         
         steps {
           dsl {
-            external('job_dsl.groovy')
-            removeAction('IGNORE')
-            removeViewAction('IGNORE')
+            external("job_dsl.groovy")
+            removeAction("IGNORE")
+            removeViewAction("IGNORE")
           }
         }
       }
