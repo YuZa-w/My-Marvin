@@ -23,10 +23,18 @@ freeStyleJob('Tools/clone-repository') {
 freeStyleJob('Tools/SEED') {
   description('Job to create dynamic jobs from Job DSL')
 
-  parameters {
-    stringParam('GITHUB_NAME', '', '"GitHub repository owner/repo_name" (e.g.: "EpitechIT31000/chocolatine")')
-    stringParam('DISPLAY_NAME', '', 'Display name for the job')
-  }
+ parameters {
+  stringParam(
+    'GITHUB_NAME',
+    '',
+    'GitHub repository owner/repo_name (e.g.: "EpitechIT31000/chocolatine")'
+  )
+  stringParam(
+    'DISPLAY_NAME',
+    '',
+    'Display name for the job'
+  )
+}
 
   steps {
     dsl {
