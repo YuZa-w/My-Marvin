@@ -10,15 +10,16 @@ services:
     environment:
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/my_marvin.yml
 
-      - USER_CHOCOLATEEN_PASSWORD=motdepasse1
-      - USER_VAUGIE_G_PASSWORD=motdepasse2
-      - USER_I_DONT_KNOW_PASSWORD=motdepasse3
-      - USER_NASSO_PASSWORD=motdepasse4
+      - USER_CHOCOLATEEN_PASSWORD=${USER_CHOCOLATEEN_PASSWORD}
+      - USER_VAUGIE_G_PASSWORD=${USER_VAUGIE_G_PASSWORD}
+      - USER_I_DONT_KNOW_PASSWORD=${USER_I_DONT_KNOW_PASSWORD}
+      - USER_NASSO_PASSWORD=${USER_NASSO_PASSWORD}
+
 
     volumes:
       - jenkins_home:/var/jenkins_home
       - ./my_marvin.yml:/var/jenkins_home/casc_configs/my_marvin.yml:ro
-      - ./job_dsl.groovy:/var/jenkins_home/job_dsl.groovy:ro
+      - ./job_dsl.groovy:/var/jenkins_home/workspace/Tools/SEED/job_dsl.groovy
     restart: unless-stopped
 
 volumes:

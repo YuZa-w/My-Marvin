@@ -68,7 +68,7 @@ jenkins:
               - user: "nasso"
 
 jobs:
-  - script: >
+  - script: |
       // Dossier Tools
       folder('Tools') {
         description('Folder for miscellaneous tools.')
@@ -96,7 +96,7 @@ jobs:
         description('Job to create dynamic jobs from Job DSL')
 
         parameters {
-          stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name')
+          stringParam('GITHUB_NAME', '', '"GitHub repository owner/repo_name" description (e.g.: "EpitechIT31000/chocolatine")')
           stringParam('DISPLAY_NAME', '', 'Display name for the job')
         }
 
