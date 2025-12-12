@@ -19,7 +19,7 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - ./my_marvin.yml:/var/jenkins_home/casc_configs/my_marvin.yml:ro
-      - ./job_dsl.groovy:/var/jenkins_home/workspace/Tools/SEED/job_dsl.groovy
+      - ./job_dsl.groovy:/var/jenkins_home/job_dsl.groovy
     restart: unless-stopped
 
 volumes:

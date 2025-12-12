@@ -68,45 +68,8 @@ jenkins:
               - user: "nasso"
 
 jobs:
-  - script: |
-      // Dossier Tools
-      folder('Tools') {
-        description('Folder for miscellaneous tools.')
-      }
-
-      // Job Tools/clone-repository
-      freeStyleJob('Tools/clone-repository') {
-        description('Job to clone a Git repository')
-
-        parameters {
-          stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
-        }
-
-        wrappers {
-          preBuildCleanup()
-        }
-
-        steps {
-          shell('git clone "$GIT_REPOSITORY_URL"')
-        }
-      }
-
-      // Job Tools/SEED
-      freeStyleJob('Tools/SEED') {
-        description('Job to create dynamic jobs from Job DSL')
-
-        parameters {
-          stringParam('GITHUB_NAME', '', '"GitHub repository owner/repo_name" description (e.g.: "EpitechIT31000/chocolatine")')
-          stringParam('DISPLAY_NAME', '', 'Display name for the job')
-        }
-
-        steps {
-          dsl {
-            external("job_dsl.groovy")
-          }
-        }
-      }
-
+  - file: /var/jenkins_home/job_dsl.groovy
+      
 unclassified:
   location:
     url: "http://localhost:8080/"
