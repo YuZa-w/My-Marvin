@@ -1,5 +1,5 @@
 FROM jenkins/jenkins:lts
-
+# RUN apt update && apt install-y make
 RUN jenkins-plugin-cli --plugins \
   cloudbees-folder \
   configuration-as-code \
